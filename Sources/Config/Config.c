@@ -163,6 +163,10 @@ void DefaultConfig(Config* config)
     config->DesktopFilter = DesktopFilterCurrent;
     config->IconsPerRow = 0;
     config->AskForElevation = true;
+    config->NameLines = 1;
+    config->TileWidth = 1.25f;
+    config->NameFontSize = 0;
+    config->NameSystemFont = false;
 }
 
 // Init config from old (non json) file.
@@ -369,6 +373,10 @@ void LoadConfig(Config* config)
     JSONReadFloat(j, "scale", &config->Scale);
 
     JSONReadInt(j, "icons_per_row", &config->IconsPerRow);
+    JSONReadInt(j, "name_lines", &config->NameLines);
+    JSONReadFloat(j, "tile_width", &config->TileWidth);
+    JSONReadInt(j, "name_font_size", &config->NameFontSize);
+    JSONReadBool(j, "name_system_font", &config->NameSystemFont);
 }
 
 void WriteConfig(const Config* config)
@@ -400,6 +408,10 @@ void WriteConfig(const Config* config)
     JSONWriteFloat(j, "scale", config->Scale);
 
     JSONWriteInt(j, "icons_per_row", config->IconsPerRow);
+    JSONWriteInt(j, "name_lines", config->NameLines);
+    JSONWriteFloat(j, "tile_width", config->TileWidth);
+    JSONWriteInt(j, "name_font_size", config->NameFontSize);
+    JSONWriteBool(j, "name_system_font", config->NameSystemFont);
 
     char* jsonstr = cJSON_Print(j);
 
